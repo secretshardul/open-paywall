@@ -115,8 +115,8 @@ export class OpenPaywall {
     const wallStyle = {
         filter: 'none',
         display: 'block',
-        position: 'absolute',
-        top: '0px',
+        position: 'fixed',
+        top: '300px',
         left: '0px',
         width: '100%',
         height: '100%',
@@ -128,7 +128,7 @@ export class OpenPaywall {
             <button class="purchase" onClick={(e) => this.purchase(e)}>PREMIUM HIPSTERS ONLY</button>
         </div>
     );
-    
+
     const paywall = (
         <div class="paywall payments">
             <form onSubmit={(e) => this.charge(e)}>
