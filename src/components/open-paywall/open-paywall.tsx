@@ -1,157 +1,179 @@
-import { Component, Prop, State, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, State, Event, EventEmitter } from '@stencil/core'
 
-declare var Stripe: any;
+declare var Stripe: any
 @Component({
-  tag: 'open-paywall',
-  styleUrl: 'open-paywall.css',
-  shadow: false
+	tag: 'open-paywall',
+	styleUrl: 'open-paywall.css',
+	shadow: false
 })
 export class OpenPaywall {
 
-  @Prop() provider: string;
-  @Prop() accessToken: string;
-  @Prop() cost: number;
-  @Prop() serverUrl: string;
-  @Prop() action: string;
-  @Prop() user: string;
+	@Prop() pageId: string
+	@Prop() provider: string
+	@Prop() accessToken: string
+	@Prop() cost: number
+	@Prop() serverUrl: string
+	@Prop() action: string
+	@Prop() user: string
 
-  @State() stripe;
-  @State() elements;
-  @State() card;
-  @State() paid: boolean = false;
-  @State() paying: boolean = false;
-  @State() mounted: boolean = false;
-  @Event() paymentMade: EventEmitter;
+	@State() stripe
+	@State() elements
+	@State() card
+	@State() paid: boolean = false;
+	@State() paying: boolean = false;
+	@State() mounted: boolean = false;
+	@Event() paymentMade: EventEmitter
 
-  stripeStyle = {
-    base: {
-        color: '#e6ebf1',
-        lineHeight: '18px',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '16px',
-        '::placeholder': {
-        color: '#e6ebf1'
-        }
-    },
-    invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a'
-    }
-  };
+	stripeStyle = {
+		base: {
+			color: '#e6ebf1',
+			lineHeight: '18px',
+			fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+			fontSmoothing: 'antialiased',
+			fontSize: '16px',
+			'::placeholder': {
+				color: '#e6ebf1'
+			}
+		},
+		invalid: {
+			color: '#fa755a',
+			iconColor: '#fa755a'
+		}
+	};
 
-  componentDidUpdate() {
-      if (!this.paid && !this.mounted && this.paying) {
-          this.createElements();
-      }
-  }
+	componentDidLoad() {
+		console.log('Component loaded')
+		console.log('access token', this.accessToken)
+		console.log('Page ID', this.pageId)
+	}
 
-  createElements() {
-    if (Stripe) {
-        this.stripe = Stripe(this.accessToken);
-        console.log('Loaded Stripe Access Token');
-    } else {
-        console.log('Stripe Isnt Loaded');
-    }
-    this.elements = this.stripe.elements();
-    this.card = this.elements.create('card', {style: this.stripeStyle});
-    this.card.mount('#card-element');
-    this.mounted = true;
-  }
+	componentDidUpdate() {
+		console.log('Page ID', this.pageId)
+		if (!this.paid && !this.mounted && this.paying) {
+			this.createElements()
+		}
+	}
 
-  purchase(e) {
-    e.preventDefault();
-    console.log('Trying To Pay');
-    this.paying = true;
-  }
+	createElements() {
 
-  async charge(e) {
-      e.preventDefault();
-      console.log('Charging Card', e);
-      const {token, err} = await this.stripe.createToken(this.card);
+		if (Stripe) {
+			this.stripe = Stripe(this.accessToken)
+			console.log('Loaded Stripe Access Token')
+		} else {
+			console.log('Stripe Isnt Loaded')
+		}
+		this.elements = this.stripe.elements()
+		this.card = this.elements.create('card', { style: this.stripeStyle })
+		this.card.mount('#card-element')
+		this.mounted = true
+	}
 
-      if (err) {
-        const errorElement = document.getElementById('card-errors');
-        errorElement.textContent = err.message;
-      } else {
-          await this.handleToken(token);
-      }
-  }
+	signIn(e: MouseEvent) {
+		e.preventDefault()
+		console.log('Signing in')
+		// Get wallet address and save in storage
 
-  async handleToken(t) {
-    // Post To Action URL
-    if (!this.action) {
-        // alert('No Server For Payments');
-    }
+		// Check transaction history and show purchase paywall
+	}
 
-    const body = {
-        token: t,
-        cost: this.cost,
-        user: this.user
-    };
+	purchase(e) {
+		e.preventDefault()
+		console.log('Trying To Pay')
+		this.paying = true
+	}
 
-    const fetchOptions = {
-        body: JSON.stringify(body), // must match 'Content-Type' header
-        headers: {
-        'user-agent': 'Mozilla/4.0 MDN Example',
-        'content-type': 'application/json'
-        },
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        referrer: 'no-referrer', // *client, no-referrer
-    };
+	async charge(e) {
+		e.preventDefault()
+		console.log('Charging Card', e)
+		const { token, err } = await this.stripe.createToken(this.card)
 
-    let serverResponse;
-    try {
-        serverResponse = await fetch(this.action, fetchOptions);
-    } catch (err) {
-        console.warn(err);
-        alert('Server Error');
-    }
-    this.paid = true;
-    this.paymentMade.emit(serverResponse);
-  }
+		if (err) {
+			const errorElement = document.getElementById('card-errors')
+			errorElement.textContent = err.message
+		} else {
+			await this.handleToken(token)
+		}
+	}
 
-  render() {
-    const wallStyle = {
-        filter: 'none',
-        display: 'block',
-        position: 'fixed',
-        top: '300px',
-        left: '0px',
-        width: '100%',
-        height: '100%',
-        'z-index': '10',
-    };
+	async handleToken(t) {
+		// Post To Action URL
+		if (!this.action) {
+			// alert('No Server For Payments');
+		}
 
-    const wall = (
-        <div class="wall" style={wallStyle}>
-            <button class="purchase" onClick={(e) => this.purchase(e)}>PREMIUM HIPSTERS ONLY</button>
-        </div>
-    );
+		const body = {
+			token: t,
+			cost: this.cost,
+			user: this.user
+		}
 
-    const paywall = (
-        <div class="paywall payments">
-            <form onSubmit={(e) => this.charge(e)}>
-                <div class="card-form">
-                    <label>
-                    Upgrade To Premium Hipster Status
+		const fetchOptions = {
+			body: JSON.stringify(body), // must match 'Content-Type' header
+			headers: {
+				'user-agent': 'Mozilla/4.0 MDN Example',
+				'content-type': 'application/json'
+			},
+			method: 'POST', // *GET, POST, PUT, DELETE, etc.
+			referrer: 'no-referrer', // *client, no-referrer
+		}
+
+		let serverResponse
+		try {
+			serverResponse = await fetch(this.action, fetchOptions)
+		} catch (err) {
+			console.warn(err)
+			alert('Server Error')
+		}
+		this.paid = true
+		this.paymentMade.emit(serverResponse)
+	}
+
+	render() {
+		const wallStyle = {
+			filter: 'none',
+			display: 'block',
+			position: 'fixed',
+			// top: '0px',
+			left: '0px',
+			bottom: '0',
+			width: '100%',
+			// height: '100%',
+			'z-index': '10',
+		}
+
+		const wall = (
+			<div class="wall" style={wallStyle}>
+				<div class="card">
+					<h1>Sign in to continue reading</h1>
+					<button class="purchase" onClick={this.signIn}>SIGN IN WITH VALORA</button>
+					{/* <button class="purchase" onClick={(e) => this.purchase(e)}>SIGN IN WITH VALORA</button> */}
+				</div>
+			</div>
+		)
+
+		const paywall = (
+			<div class="paywall payments">
+				<form onSubmit={(e) => this.charge(e)}>
+					<div class="card-form">
+						<label>
+							Upgrade To Premium Hipster Status
                     </label>
-                    <div id="card-element">
-                    </div>
-                    <div id="card-errors" role="alert"></div>
-                </div>
-                <button>UPGRADE $15</button>
-            </form>
-        </div>);
+						<div id="card-element">
+						</div>
+						<div id="card-errors" role="alert"></div>
+					</div>
+					<button>UPGRADE $15</button>
+				</form>
+			</div>)
 
-    if (!this.paid) {
-        if (this.paying) {
-            return paywall;
-        } else {
-            return wall;
-        }
-    } else {
-        return null;
-    }
-  }
+		if (!this.paid) {
+			if (this.paying) {
+				return paywall
+			} else {
+				return wall
+			}
+		} else {
+			return null
+		}
+	}
 }

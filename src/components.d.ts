@@ -46,6 +46,7 @@ declare global {
       accessToken?: string;
       action?: string;
       cost?: number;
+      pageId?: string;
       provider?: string;
       serverUrl?: string;
       user?: string;

@@ -9,8 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="styles.css">
-
     <style>
        .navbar-brand {
             margin: auto;
@@ -26,8 +24,6 @@
     <script src="/build/open-paywall.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
 
-    <script type="text/javascript" src="script.js"></script>
-
     <title>National News</title>
 </head>
 
@@ -40,98 +36,55 @@
     </nav>
 
     <div class="container mt-3">
+        <open-paywall provider="stripe" cost="1500" access-token="your-token" page-id="nasa-rover">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/NASA_Mars_Rover.jpg" class="card-img-top" alt="...">
+            <h1>NASA receives first weather reports from Perseverance rover on Mars at Jezero Crater</h1>
 
-        <!-- <open-paywall provider="stripe" access-token="pk_test_AvraDjBcD7iwWLdQciVt0F7q" cost="1025">
-            <div class="premium-content">
-                <p>Lorem ipsum dolor amet plaid meh cornhole squid. Tousled small batch dreamcatcher PBR&B, truffaut mixtape
-                    tilde unicorn forage snackwave plaid quinoa four dollar toast cliche. Meditation sriracha pabst crucifix
-                    normcore readymade listicle. Paleo listicle locavore actually sriracha direct trade kitsch offal, vinyl
-                    chicharrones cred.
-                </p>
-                <p>
-                    Tumeric ugh poke yuccie, waistcoat kogi activated charcoal letterpress. Letterpress shoreditch four loko yr
-                    bespoke typewriter. Green juice fashion axe man bun cloud bread four loko, pok pok food truck ramps
-                    gluten-free cardigan lomo. Sustainable food truck umami you probably haven't heard of them tattooed viral
-                    deep v waistcoat polaroid vaporware listicle authentic pop-up.
-                </p>
-                <p>
-                    Crucifix bespoke cardigan small batch heirloom deep v occupy migas irony pop-up you probably haven't heard
-                    of them enamel pin chartreuse retro marfa. Marfa vice godard shaman, squid umami paleo unicorn quinoa
-                    glossier. Mumblecore bespoke gluten-free fam, adaptogen shoreditch farm-to-table authentic sriracha shabby
-                    chic lumbersexual humblebrag distillery kale chips glossier. Crucifix tilde tofu kinfolk disrupt
-                    sustainable. Wolf woke glossier tote bag tattooed, twee franzen deep v. Before they sold out ugh umami
-                    meditation wolf.
-                </p>
-                <p>
-                    Kitsch letterpress photo booth flannel poke, prism franzen messenger bag umami. Craft beer tofu iPhone offal
-                    paleo four loko heirloom typewriter brunch. Pabst PBR&B green juice deep v ennui swag 8-bit venmo ethical
-                    umami raw denim. Meh bitters cold-pressed keytar chicharrones, VHS hexagon. Biodiesel echo park health goth
-                    chicharrones street art, bespoke iPhone trust fund vegan. Bitters ramps kogi, schlitz butcher cray squid air
-                    plant gastropub austin whatever normcore neutra artisan prism. Humblebrag iceland jianbing, crucifix
-                    gastropub air plant venmo edison bulb vape tattooed messenger bag +1.
-                </p>
-                <p>
-                    Oh. You need a little dummy text for your mockup? How quaint.
-                </p>
-                <p>
-                    I bet you’re still using Bootstrap too…</p>
-            </div>
-        </open-paywall> -->
+            <p>Earlier this week, the NASA Perseverance rover reported on the weather from Mars’s Jezero
+                Crater for the first time,
+                providing an invaluable data set that will augment scientific understanding of the Martian
+                atmosphere and inform future
+                decisions about the rover’s mission.
 
-        <div>
+                The weather data will also help mission scientists decide when to launch Ingenuity, a
+                drone-like helicopter, that’s set
+                to take flight as early as Sunday.
 
+                NASA’s Perseverance rover may unlock mysteries behind weather on Mars
 
+                Perseverance, which was launched from Earth on July 30, arrived on the Red Planet in
+                mid-February and has been exploring
+                the Martian surface and collecting various types of data.
 
-            <open-paywall provider="stripe" cost="1500" access-token="your-token">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/NASA_Mars_Rover.jpg" class="card-img-top" alt="...">
-                <h1>NASA receives first weather reports from Perseverance rover on Mars at Jezero Crater</h1>
+                Among them is weather data, which scientists say will better shape what we know about
+                radiative processes and the cycle
+                of water in Mars’s atmosphere. There isn’t much of it, but water trapped beneath solid
+                carbon-dioxide ice caps at the
+                poles can be vaporized during the summertime and enter the atmosphere. Part of the plan with
+                Perseverance is to unlock
+                clues about what happens after.
 
-                <p>Earlier this week, the NASA Perseverance rover reported on the weather from Mars’s Jezero
-                    Crater for the first time,
-                    providing an invaluable data set that will augment scientific understanding of the Martian
-                    atmosphere and inform future
-                    decisions about the rover’s mission.
+                Perseverance is in Mars’s Jezero Crater, a site NASA chose for the rover’s landing thanks to
+                its wide expanses, free of
+                obstacles, and the presence of a dried-up river delta from 3.5 billion years ago.
 
-                    The weather data will also help mission scientists decide when to launch Ingenuity, a
-                    drone-like helicopter, that’s set
-                    to take flight as early as Sunday.
+                On Saturday and Sunday, the rover’s Mars Environmental Dynamics Analyzer, or MEDA, reported
+                a high temperature of
+                minus-7.6 degrees, and a low of minus-117.4 degrees. That rivals the coldest temperature
+                measured on Earth — minus-128.6
+                degrees observed at the Vostok weather station in Antarctica on July 21, 1983.
 
-                    NASA’s Perseverance rover may unlock mysteries behind weather on Mars
+                At least the winds on Mars were comparatively tepid, gusting to only 22 mph. But imagine
+                that wind chill …
 
-                    Perseverance, which was launched from Earth on July 30, arrived on the Red Planet in
-                    mid-February and has been exploring
-                    the Martian surface and collecting various types of data.
-
-                    Among them is weather data, which scientists say will better shape what we know about
-                    radiative processes and the cycle
-                    of water in Mars’s atmosphere. There isn’t much of it, but water trapped beneath solid
-                    carbon-dioxide ice caps at the
-                    poles can be vaporized during the summertime and enter the atmosphere. Part of the plan with
-                    Perseverance is to unlock
-                    clues about what happens after.
-
-                    Perseverance is in Mars’s Jezero Crater, a site NASA chose for the rover’s landing thanks to
-                    its wide expanses, free of
-                    obstacles, and the presence of a dried-up river delta from 3.5 billion years ago.
-
-                    On Saturday and Sunday, the rover’s Mars Environmental Dynamics Analyzer, or MEDA, reported
-                    a high temperature of
-                    minus-7.6 degrees, and a low of minus-117.4 degrees. That rivals the coldest temperature
-                    measured on Earth — minus-128.6
-                    degrees observed at the Vostok weather station in Antarctica on July 21, 1983.
-
-                    At least the winds on Mars were comparatively tepid, gusting to only 22 mph. But imagine
-                    that wind chill …
-
-                    The MEDA probes for temperature at four different levels — the surface, 2.76 feet, 4.76 feet
-                    and 98.43 feet. While
-                    barely touching the surface of the lower atmosphere, the MEDA is expected to help offer
-                    insight into Mars’s radiation
-                    budget. In other words, scientists will learn how sunlight striking the surface is
-                    transformed into heat that enters and
-                    cycles through the atmosphere.</p>
-            </open-paywall>
-        </div>
+                The MEDA probes for temperature at four different levels — the surface, 2.76 feet, 4.76 feet
+                and 98.43 feet. While
+                barely touching the surface of the lower atmosphere, the MEDA is expected to help offer
+                insight into Mars’s radiation
+                budget. In other words, scientists will learn how sunlight striking the surface is
+                transformed into heat that enters and
+                cycles through the atmosphere.</p>
+        </open-paywall>
     </div>
 </body>
 

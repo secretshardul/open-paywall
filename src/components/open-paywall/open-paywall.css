@@ -23,11 +23,11 @@ open-paywall > .payments {
     top: 0px;
     left: 0px;
     margin: 10px;
-    
+
 }
 
 .payments > form {
-    display: block;    
+    display: block;
     margin: 20px auto;
     padding: 10px;
     background-color: #3F51B5;
@@ -63,19 +63,28 @@ open-paywall > .payments {
 }
 
 
-open-paywall > .wall > .purchase {
+.purchase {
     display: block;
     margin: auto;
     margin-top: 35px;
     text-align: center;
-    font-family: 'Avenir Next'; 
+    font-family: 'Avenir Next';
     background-color: #3F51B5;
     color: white;
     padding: 10px;
-    font-size: 18px;
+    /* font-size: 18px; */
     letter-spacing: 0.5px;
     font-weight: 500;
     border-radius: 5px;
+}
+
+.card {
+  text-align: center;
+  padding: 10px;
+  /* margin-left: 90px; */
+  /* margin-right: 90px; */
+  width: '50%';
+  height: '100%';
 }
 
 .StripeElement {
